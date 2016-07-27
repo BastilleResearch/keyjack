@@ -1,0 +1,51 @@
+Bastille Threat Research Team Tracking Number 13
+Document version: 1.0
+
+Overview
+
+A vulnerability has been discovered that allows encrypted keystrokes to be injected
+into an AmazonBasics wireless keyboard’s dongle without knowledge of the encryption key.
+
+
+
+Affected Platforms
+
+The following products have been tested and shown to be affected:
+
+- AmazonBasics Wireless Keyboard
+- AmazonBasics USB Dongle (USB ID 04f2:1130)
+
+
+
+Impact
+
+The AmazonBasics keyboard encrypts RF packets, but the implementation makes it possible 
+to infer the ciphertext and inject malicious keystrokes.
+
+
+
+Mitigation
+
+Exploiting this vulnerability involves transmitting RF packets to AmazonBasics dongle, 
+which requires physical proximity to the target computer. 
+
+
+
+Suggested Solutions 
+
+This vulnerability exists because the firmware on the dongle does not enforce incrementing
+AES counters. In future revisions of the product, correctly implementing counter mode AES 
+by requiring that subsequent counters are incremented would mitigate this vulnerability. 
+
+
+
+Test Environment
+
+Packet injection was tested using a nRF24LU1+ based USB dongle to transmit RF packets to 
+an AmazonBasics USB dongle.
+
+
+
+Credits
+
+Marc Newlin

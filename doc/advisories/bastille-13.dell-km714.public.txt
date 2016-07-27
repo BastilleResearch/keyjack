@@ -1,0 +1,52 @@
+Bastille Threat Research Team Tracking Number 13
+Document version: 1.0
+
+Overview
+
+A vulnerability has been discovered that allows encrypted keystrokes to be injected
+into a Dell KM714 keyboard’s dongle without knowledge of the encryption key.
+
+
+
+Affected Platforms
+
+The following products have been tested and shown to be affected:
+
+- Dell KM714 wireless keyboard
+- Dell KM714 Dongle C-U0007
+  - Firmware version 012.005.00028
+  - USB ID 046d:c52b
+
+
+
+Proof-of-Concept Details
+
+Dell KM714 keyboards encrypt keyboard packets using 128-bit AES, but the implementation 
+makes it possible to infer the ciphertext and inject malicious keystrokes.
+
+
+
+Mitigation
+
+Exploiting this vulnerability involves transmitting RF packets to a Dell KM714 USB
+dongle, which requires physical proximity to the target computer. 
+
+
+
+Suggested Solutions 
+
+This vulnerability exists because the firmware on the dongle does not enforce incrementing
+AES counters. In future revisions of the product, correctly implementing counter mode AES 
+by requiring that subsequent counters are incremented would mitigate this vulnerability. 
+
+
+
+Test Environment
+
+Keystroke injection was tested using a nRF24LU1+ based USB dongle, transmitting to a Dell 
+KM714 USB dongle.
+
+
+Credits
+
+Marc Newlin
